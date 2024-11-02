@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приложение на весь экран</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh; /* Заполняет всю высоту окна */
+            background-color: #282c34;
+            color: white;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        button {
+            padding: 20px;
+            font-size: 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #61dafb;
+            color: #282c34;
+        }
+        img {
+            display: none; /* Скрываем изображение изначально */
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <button id="fullscreenBtn">Открыть на весь экран</button>
+    <img id="fullscreenImage" src="cover-screamer.jpg" alt="Изображение">
+    <audio id="audio" src="bu-ispugalsia.mp3" preload="auto"></audio>
+    
+    <script>
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        const audio = document.getElementById('audio');
+        fullscreenBtn.addEventListener('click', () => {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Для Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Для Chrome, Safari и Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // Для IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+            // Показать изображение
+            fullscreenImage.style.display = 'block';
+            // Воспроизвести звук
+            audio.play();
+            // Скрыть кнопку
+            fullscreenBtn.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
